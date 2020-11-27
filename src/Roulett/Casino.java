@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Casino {
 
-    CasinoGames game;
+    RouletteTable rouletteTable;
     Player player;
 
     public Casino(Player player) {
@@ -14,14 +14,28 @@ public class Casino {
     public void chooseCasinoGame() {
         System.out.println("Milyen játékot szeretne játszni? \n" + "a) - Rulett");
         Scanner sc = new Scanner(System.in);
-        String game = sc.next();
-        if (game.equals("a")) {
-            this.game = new RouletteTable();
+        if (sc.next().equals("a")) {
+            rouletteTable = new RouletteTable();
         }
-        System.out.println();
+        System.out.println("Valódi játékot (a), vagy simulációt(b) szeretne futtatni?");
+        if (sc.next().equals("b")) {
+            System.out.println("Szimulációt választotta. Hány szimlációt futtassunk?");
+            int rounds = sc.nextInt();
+            System.out.println("Melyik stratégiát választja? \n" + " 1 - Szín duplázó");
+            int stgy = sc.nextInt();
+            if (stgy == 1) {
+                System.out.println("Szín duplázó statégiát választotta.");
+                simulation(rounds, player);
+            }
+
+        }
 
     }
 
+    public void simulation(int numberOFSpins, Player player){
 
+    }
+
+//    public void realGame(RouletteTable rouletteTable, Player player);
 
 }

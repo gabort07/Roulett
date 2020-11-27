@@ -4,10 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Player pisti = new Player(1000);
+        DoubleColorPlayer pisti = new DoubleColorPlayer(1000,"Red");
         Casino casino = new Casino(pisti);
-//        casino.chooseCasinoGame();
-        pisti.doubleColorStrategy(new RouletteTable(), "Red");
+        pisti.strategy(new RouletteTable());
 
     }
 }

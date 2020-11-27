@@ -2,7 +2,7 @@ package Roulett;
 
 import java.util.ArrayList;
 
-public class RouletteTable implements CasinoGames{
+public class RouletteTable {
     private final int MAX_POT = 1000;
     private final int MIN_POT= 20;
     private int playerPot;
@@ -74,18 +74,5 @@ public class RouletteTable implements CasinoGames{
 
     }
 
-    @Override
-    public void startGame(Casino game) {
 
-    }
-
-    @Override
-    public void simulation(int numbOfSpins) {
-
-    }
-
-    @Override
-    public void realGame(RouletteTable rouletteTable, Player player) {
-
-    }
 }
