@@ -18,7 +18,7 @@ public abstract class Player implements Strategy {
         this.budget = budget;
     }
 
-    public void win(int prise) {
+    public void addWin(int prise) {
         budget += prise;
     }
 

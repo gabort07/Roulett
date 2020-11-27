@@ -5,10 +5,9 @@ import java.util.Scanner;
 public class Casino {
 
     RouletteTable rouletteTable;
-    Player player;
 
-    public Casino(Player player) {
-        this.player = player;
+    public Casino() {
+        rouletteTable = new RouletteTable();
     }
 
     public void chooseCasinoGame() {
@@ -25,16 +24,16 @@ public class Casino {
             int stgy = sc.nextInt();
             if (stgy == 1) {
                 System.out.println("Szín duplázó statégiát választotta.");
-                simulation(rounds, player);
+//                simulation(rounds, );
             }
 
         }
 
     }
 
-    public void simulation(int numberOFSpins, Player player){
+//    public void simulation(int numberOFSpins, Player player){
 
-    }
+//    }
 
 //    public void realGame(RouletteTable rouletteTable, Player player);
 

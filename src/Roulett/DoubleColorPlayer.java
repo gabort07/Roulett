@@ -19,7 +19,7 @@ public class DoubleColorPlayer extends Player {
             System.out.println("Az egyenlege: " + getBudget() + " A tét: " + playerPot);
             String fieldColor = rouletteTable.getTable().get(rouletteTable.spinTheWheel());
             if (fieldColor.equals(color)) {
-                win(playerPot * 2);
+                addWin(playerPot * 2);
                 System.out.println("Ön nyert! A nyeremény: " + playerPot * 2 + " egynlege: " + getBudget());
                 break;
             } else if (playerPot == rouletteTable.getMAX_POT()) {

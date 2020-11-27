@@ -6,10 +6,12 @@ public class RouletteTable {
     private final int MAX_POT = 1000;
     private final int MIN_POT= 20;
     private int playerPot;
+    private ArrayList<Player> playersList;
 
     private ArrayList<String> table = new ArrayList<>();
 
     public RouletteTable() {
+        playersList=new ArrayList<>();
         table.add(0, "Green");
         table.add(1, "Red");
         table.add(2, "Black");
@@ -47,6 +49,14 @@ public class RouletteTable {
         table.add(34, "Red");
         table.add(35, "Black");
         table.add(36, "Red");
+    }
+
+    public ArrayList<Player> getPlayersList() {
+        return playersList;
+    }
+
+    public void setPlayersList(ArrayList<Player> playersList) {
+        this.playersList = playersList;
     }
 
     public int getPlayerPot() {

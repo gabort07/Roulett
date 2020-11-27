@@ -18,7 +18,7 @@ public class PlayerTest {
     public void addWinToBudget() {
         player.setBudget(100);
         assertEquals(100, player.getBudget());
-        player.win(50);
+        player.addWin(50);
         assertEquals(150, player.getBudget());
     }
 
