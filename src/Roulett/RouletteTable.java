@@ -2,8 +2,11 @@ package Roulett;
 
 import java.util.ArrayList;
 
-public class RouletteTable {
-    private final int MAX_POT = 1000000;
+public class RouletteTable implements CasinoGames{
+    private final int MAX_POT = 1000;
+    private final int MIN_POT= 20;
+    private int playerPot;
+
     private ArrayList<String> table = new ArrayList<>();
 
     public RouletteTable() {
@@ -46,8 +49,43 @@ public class RouletteTable {
         table.add(36, "Red");
     }
 
+    public int getPlayerPot() {
+        return playerPot;
+    }
+
+    public void setPlayerPot(int playerPot) {
+        this.playerPot = playerPot;
+    }
+
+    public int getMIN_POT() {
+        return MIN_POT;
+    }
+
+    public int getMAX_POT() {
+        return MAX_POT;
+    }
+
+    public ArrayList<String> getTable() {
+        return table;
+    }
 
     public int spinTheWheel() {
         return (int) (Math.random() * 36);
+
+    }
+
+    @Override
+    public void startGame(Casino game) {
+
+    }
+
+    @Override
+    public void simulation(int numbOfSpins) {
+
+    }
+
+    @Override
+    public void realGame(RouletteTable rouletteTable, Player player) {
+
     }
 }
