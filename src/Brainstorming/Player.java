@@ -12,8 +12,17 @@ public class Player extends Strategy {
         this.playerName = playerName;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
     @Override
     public void makeBets() {
+        int wallet = getWallet();
         super.makeBets();
     }
 }
