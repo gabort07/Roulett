@@ -1,9 +1,10 @@
 package Roulett;
 
-public abstract class Player implements Strategy {
+public abstract class  Player {
     private int budget;
 
     public Player() {
+        this.budget = 10000;
     }
 
     public Player(int budget) {
@@ -22,9 +23,10 @@ public abstract class Player implements Strategy {
         budget += prise;
     }
 
-    public void loose(int loss) {
+    public void addLoose(int loss) {
         budget -= loss;
     }
 
+    public abstract void strategy(RouletteTable rouletteTable);
 
 }

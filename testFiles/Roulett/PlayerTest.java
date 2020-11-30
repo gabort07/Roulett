@@ -25,7 +25,7 @@ public class PlayerTest {
     @Test
     public void divideLossFromBudget() {
         player.setBudget(100);
-        player.loose(70);
+        player.addLoose(70);
         assertEquals(30,player.getBudget());
     }
 
