@@ -6,7 +6,7 @@ public class Main {
 
         DoubleColorPlayer pisti = new DoubleColorPlayer(1000,"Red");
         Casino casino = new Casino();
-        pisti.strategy(new RouletteTable());
+        RouletteTable table = new RouletteTable();
 
     }
 }
