@@ -7,8 +7,8 @@ public class Player extends Strategy {
 
 
 
-    public Player(int wallet, int sumOfIncome, int lastWonMone, int hand, ArrayList<Integer> lastWinnerNumbers, String playerName) {
-        super(wallet, sumOfIncome, lastWonMone, hand, lastWinnerNumbers);
+    public Player(int wallet, int sumOfIncome, int lastWonMoney, int hand, ArrayList<Integer> lastWinnerNumbers, String playerName) {
+        super(wallet, sumOfIncome, lastWonMoney, hand, lastWinnerNumbers);
         this.playerName = playerName;
     }
 
@@ -21,7 +21,7 @@ public class Player extends Strategy {
     }
 
     @Override
-    public void makeBets() {
+    public Bet makeBets() {
         int wallet = getWallet();
         super.makeBets();
     }
