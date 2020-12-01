@@ -6,6 +6,11 @@ public abstract class Player {
     private int budget;
     private int tableMinBet;
     private int tableMaxBet;
+    private ArrayList<Bet> playerBets = new ArrayList<>();
+
+    public ArrayList<Bet> getPlayerBets() {
+        return playerBets;
+    }
 
     public Player() {
     }
@@ -46,14 +51,19 @@ public abstract class Player {
         this.budget = budget;
     }
 
-    public void addWin(int prise) {
+    public void addWin(double prise) {
         budget += prise;
     }
 
-    public void addLoose(int loss) {
+    public void addLoose(int loss){
         budget -= loss;
     }
 
-    public abstract Bet makeBet(ArrayList<Integer> winnerNumbers);
+    public void addLoose() {
+        int lastBet = playerBets.get(playerBets.size()-1).getBetAmount();
+        budget -= lastBet;
+    }
+
+    public abstract void makeBet(boolean win);
 
 }

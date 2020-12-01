@@ -39,12 +39,14 @@ public class Casino {
         if (stgy == 1) {
             System.out.println("Szín duplázó statégiát választotta.");
             System.out.println("Melyik színnel játszunk? piros/fekete");
-            Martingales laci = new Martingales(10000, rouletteTable.getMIN_POT(), rouletteTable.getMAX_POT(),sc.next());
+            String color = sc.next();
+            Martingales laci = new Martingales(10000, rouletteTable.getMIN_POT(), rouletteTable.getMAX_POT(), color);
+            rouletteTable.getPlayersList().add(laci);
             System.out.println("Hány körös szimulációt futtassunk?");
             int rounds = sc.nextInt();
             int sumOfWin = 0;
             for (int i = 0; i < rounds; i++) {
-                laci.strategy(this);
+                rouletteTable.play();
                 sumOfWin += laci.getBudget();
             }
             System.out.println(rounds + " szimuláció végeredménye: " + sumOfWin);

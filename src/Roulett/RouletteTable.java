@@ -6,22 +6,22 @@ import java.util.HashMap;
 public class RouletteTable {
     private final int MAX_POT = 1000;
     private final int MIN_POT = 20;
-    private ArrayList<Integer> winnerNumbers;
+    private ArrayList<Integer> winnerNumbers = new ArrayList<>();
     private int playerPot;
     private HashMap<Player, ArrayList<Bet>> betHashMap = new HashMap<>();
-    private ArrayList<Player> playersList;
-    private HashMap<Integer, ArrayList<Splitting>> table = new HashMap<>();
+    private ArrayList<Player> playersList = new ArrayList<>();
+    private HashMap<Integer, ArrayList<Splitting>> tableMap = new HashMap<>();
 
 
     public RouletteTable() {
-        playersList = new ArrayList<>();
         for (Splitting actual : Splitting.values()) {
             for (int i : defineSplitting(actual)) {
-                table.putIfAbsent(i, new ArrayList<>());
-                table.get(i).add(actual);
+                tableMap.putIfAbsent(i, new ArrayList<>());
+                tableMap.get(i).add(actual);
             }
         }
-        System.out.println(table);
+
+//        System.out.println(tableMap);
     }
 
     public int[] defineSplitting(Splitting actual) {
@@ -107,8 +107,8 @@ public class RouletteTable {
         return MAX_POT;
     }
 
-    public HashMap<Integer, ArrayList<Splitting>> getTable() {
-        return table;
+    public HashMap<Integer, ArrayList<Splitting>> getTableMap() {
+        return tableMap;
     }
 
     public int spinTheWheel() {
@@ -117,14 +117,42 @@ public class RouletteTable {
         return a;
     }
 
-    public void askBet() {
+    public void askBet(boolean win) {
         for (Player actualPlayer : playersList) {
-            Bet actualBet = actualPlayer.makeBet(winnerNumbers);
+            actualPlayer.makeBet(win);
+            Bet actualBet = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1);
             betHashMap.putIfAbsent(actualPlayer, new ArrayList<>());
             betHashMap.get(actualPlayer).add(actualBet);
-            System.out.println("Player " + actualPlayer + " Player's bet: " + actualBet.amount +
-                    " összeg a " + actualBet.bet + " pozícióra");
+            System.out.println("Player " + actualPlayer + " Player's bet: " + actualBet.betAmount +
+                    " összeg a " + actualBet.betPosition + " pozícióra");
         }
     }
 
+    public void play() {
+        boolean win = false;
+        int winAmount = 0;
+            askBet(win);
+            spinTheWheel();
+            checkAndPayBets(win);
+
+    }
+
+    public void checkAndPayBets(boolean win) {
+        for (Player actualPlayer : playersList) {
+            int lastWinnerPosition = winnerNumbers.get(winnerNumbers.size() - 1);
+            int playerBetAmount = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1).getBetAmount();
+            Splitting playerBetPosition = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1).getBetPosition();
+            if (tableMap.get(lastWinnerPosition).contains(playerBetPosition)) {
+                win = true;
+                actualPlayer.addWin(calculatePrise(playerBetAmount, playerBetPosition));
+            } else {
+                win = false;
+                actualPlayer.addLoose();
+            }
+        }
+    }
+
+    public double calculatePrise(int amount, Splitting position) {
+        return amount + amount * position.getMultiplier();
+    }
 }
