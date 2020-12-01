@@ -117,39 +117,37 @@ public class RouletteTable {
         return a;
     }
 
-    public void askBet(boolean win) {
+    public void askBet() {
         for (Player actualPlayer : playersList) {
-            actualPlayer.makeBet(win);
+            actualPlayer.makeBet();
             Bet actualBet = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1);
             betHashMap.putIfAbsent(actualPlayer, new ArrayList<>());
             betHashMap.get(actualPlayer).add(actualBet);
-            System.out.println("Player " + actualPlayer + " Player's bet: " + actualBet.betAmount +
+            System.out.println("Player " + actualPlayer + "\nPlayer's bet: " + actualBet.betAmount +
                     " összeg a " + actualBet.betPosition + " pozícióra");
         }
     }
 
     public void play() {
-        boolean win = false;
-        int winAmount = 0;
-        askBet(win);
-        System.out.print("A nyerőszám: " + spinTheWheel() + " ");
-        checkAndPayBets(win);
+        askBet();
+        System.out.println("A nyerőszám: " + spinTheWheel());
+        checkAndPayBets();
 
     }
 
-    public void checkAndPayBets(boolean win) {
+    public void checkAndPayBets() {
         for (Player actualPlayer : playersList) {
             int lastWinnerPosition = winnerNumbers.get(winnerNumbers.size() - 1);
             int playerBetAmount = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1).getBetAmount();
             Splitting playerBetPosition = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1).getBetPosition();
             if (tableMap.get(lastWinnerPosition).contains(playerBetPosition)) {
-                win = true;
-                System.out.println("  Nyert: \n");
-                actualPlayer.addWin(calculatePrise(playerBetAmount, playerBetPosition));
-
+                double preis = calculatePrise(playerBetAmount, playerBetPosition);
+                actualPlayer.addWin(preis);
+                actualPlayer.getPlayerBets().clear();
+                System.out.println("Nyert: " + preis + " összeget hozzáadtuk a pénztárcájához \n");
             } else {
-                win = false;
-                actualPlayer.addLoose();
+                System.out.println("Ön vesztett, " + playerBetAmount + " összeget");
+                actualPlayer.addLoose(playerBetAmount);
             }
         }
     }

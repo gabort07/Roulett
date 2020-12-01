@@ -64,6 +64,6 @@ public abstract class Player {
         budget -= lastBet;
     }
 
-    public abstract void makeBet(boolean win);
+    public abstract void makeBet();
 
 }

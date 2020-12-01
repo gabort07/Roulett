@@ -1,7 +1,5 @@
 package Roulett;
 
-import java.util.ArrayList;
-
 public class Martingales extends Player {
 
     Splitting color;
@@ -21,26 +19,22 @@ public class Martingales extends Player {
     }
 
     @Override
-    public void makeBet(boolean win) {
+    public void makeBet() {
         int playerPot;
-        if (getPlayerBets().size()==0) {
+        if (getPlayerBets().size() == 0) {
             playerPot = getTableMinBet();
         } else {
-            playerPot = getPlayerBets().get(getPlayerBets().size() - 1).betAmount;
+            playerPot = getPlayerBets().get(getPlayerBets().size() - 1).getBetAmount() * 2;
         }
+
         if (getBudget() > 0) {
             System.out.println("Az egyenlege: " + getBudget() + " A tét: " + playerPot);
-            if (win) {
-                System.out.println("Ön nyert! A nyeremény: " + playerPot * 2 + " egynlege: " + getBudget());
-                playerPot = getTableMinBet();
-            } else if (!win) {
-                if (playerPot <= getTableMaxBet() / 2) {
-                    playerPot *= 2;
-                    getPlayerBets().add(new Bet(playerPot, color));
-                } else {
-                    getPlayerBets().add(new Bet(playerPot, color));
-                }
+            if (playerPot <= getTableMaxBet() / 2) {
+                getPlayerBets().add(new Bet(playerPot, color));
+            } else {
+                getPlayerBets().add(new Bet(playerPot, color));
             }
+
         } else {
             System.out.println("Önnek üres a péztárzája");
         }
@@ -48,6 +42,6 @@ public class Martingales extends Player {
 
     @Override
     public String toString() {
-        return "Martingales{}";
+        return "Martingales " + this.color;
     }
 }

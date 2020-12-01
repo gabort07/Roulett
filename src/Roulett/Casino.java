@@ -47,9 +47,8 @@ public class Casino {
             int sumOfWin = 0;
             for (int i = 0; i < rounds; i++) {
                 rouletteTable.play();
-                sumOfWin += laci.getBudget();
             }
-            System.out.println(rounds + " szimuláció végeredménye: " + sumOfWin);
+            System.out.println(rounds + " szimuláció végeredménye: " + laci.getBudget());
         }
 
 //    public void realGame(RouletteTable rouletteTable, Player player);

@@ -16,4 +16,8 @@ public class Bet {
     public Splitting getBetPosition() {
         return betPosition;
     }
+
+    public void setBetAmount(int betAmount) {
+        this.betAmount = betAmount;
+    }
 }
