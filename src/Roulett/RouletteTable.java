@@ -2,24 +2,23 @@ package Roulett;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class RouletteTable {
     private final int MAX_POT = 1000;
     private final int MIN_POT = 20;
     private ArrayList<Integer> winnerNumbers;
     private int playerPot;
-
+    private HashMap<Player, ArrayList<Bet>> betHashMap = new HashMap<>();
     private ArrayList<Player> playersList;
-    private HashMap<Integer, ArrayList<Splitting>> table= new HashMap<>();
+    private HashMap<Integer, ArrayList<Splitting>> table = new HashMap<>();
 
 
     public RouletteTable() {
         playersList = new ArrayList<>();
         for (Splitting actual : Splitting.values()) {
             for (int i : defineSplitting(actual)) {
-              table.putIfAbsent(i, new ArrayList<>());
-              table.get(i).add(actual);
+                table.putIfAbsent(i, new ArrayList<>());
+                table.get(i).add(actual);
             }
         }
         System.out.println(table);
@@ -113,16 +112,18 @@ public class RouletteTable {
     }
 
     public int spinTheWheel() {
-        int a =(int) (Math.random() * 37);
+        int a = (int) (Math.random() * 37);
         winnerNumbers.add(a);
         return a;
     }
 
-    public void askBet(){
-        for(Player actualPlayer : playersList){
-            Bet actualBet=actualPlayer.makeBet(winnerNumbers);
-            System.out.println("Player "+ actualPlayer+" Player's bet: "+ actualBet.amount+
-                    " összeg");
+    public void askBet() {
+        for (Player actualPlayer : playersList) {
+            Bet actualBet = actualPlayer.makeBet(winnerNumbers);
+            betHashMap.putIfAbsent(actualPlayer, new ArrayList<>());
+            betHashMap.get(actualPlayer).add(actualBet);
+            System.out.println("Player " + actualPlayer + " Player's bet: " + actualBet.amount +
+                    " összeg a " + actualBet.bet + " pozícióra");
         }
     }
 

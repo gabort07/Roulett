@@ -11,7 +11,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Martingele();
+        player = new Martingele(0,20,10000,"red");
     }
 
     @Test
