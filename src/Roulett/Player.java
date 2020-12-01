@@ -1,5 +1,7 @@
 package Roulett;
 
+import java.util.ArrayList;
+
 public abstract class  Player {
     private int budget;
 
@@ -27,6 +29,6 @@ public abstract class  Player {
         budget -= loss;
     }
 
-    public abstract void strategy(RouletteTable rouletteTable);
+    public abstract Bet makeBet(ArrayList<Integer> winnerNumbers);
 
 }

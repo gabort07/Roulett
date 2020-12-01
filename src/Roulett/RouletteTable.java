@@ -2,11 +2,12 @@ package Roulett;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
+import java.util.List;
 
 public class RouletteTable {
     private final int MAX_POT = 1000;
     private final int MIN_POT = 20;
+    private ArrayList<Integer> winnerNumbers;
     private int playerPot;
 
     private ArrayList<Player> playersList;
@@ -33,7 +34,7 @@ public class RouletteTable {
             case RED:
                 numbers = new int[]{1, 3, 5, 7, 9, 11, 13, 15, 17, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36};
                 break;
-            case BLACk:
+            case BLACK:
                 numbers = new int[]{2, 4, 6, 8, 10, 11, 13, 15, 17, 20, 22, 24, 26, 28, 29, 31, 33, 35};
                 break;
             case EVEN:
@@ -112,41 +113,17 @@ public class RouletteTable {
     }
 
     public int spinTheWheel() {
-        return (int) (Math.random() * 36);
-
+        int a =(int) (Math.random() * 37);
+        winnerNumbers.add(a);
+        return a;
     }
 
-
-    public void realOrSimulation() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Valódi játékot (a), vagy simulációt (b) szeretne futtatni?");
-        if (sc.next().equals("b")) {
-            simulation();
+    public void askBet(){
+        for(Player actualPlayer : playersList){
+            Bet actualBet=actualPlayer.makeBet(winnerNumbers);
+            System.out.println("Player "+ actualPlayer+" Player's bet: "+ actualBet.amount+
+                    " összeg");
         }
     }
-
-    public void simulation() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("A szimulációt választotta.");
-        System.out.println("Melyik stratégiát választja? \n" + " 1 - Szín duplázó");
-        int stgy = sc.nextInt();
-        if (stgy == 1) {
-            System.out.println("Szín duplázó statégiát választotta.");
-            System.out.println("Melyik színnel játszunk? Piros/Fekete");
-            DoubleColorPlayer laci = new DoubleColorPlayer(10000, sc.next());
-            System.out.println("Hány körös szimulációt futtassunk?");
-            int rounds = sc.nextInt();
-            int sumOfWin = 0;
-            for (int i = 0; i < rounds; i++) {
-                laci.strategy(this);
-                sumOfWin += laci.getBudget();
-            }
-            System.out.println(rounds + " szimuláció végeredménye: " + sumOfWin);
-        }
-
-//    public void realGame(RouletteTable rouletteTable, Player player);
-
-    }
-
 
 }
