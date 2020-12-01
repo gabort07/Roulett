@@ -131,9 +131,9 @@ public class RouletteTable {
     public void play() {
         boolean win = false;
         int winAmount = 0;
-            askBet(win);
-            spinTheWheel();
-            checkAndPayBets(win);
+        askBet(win);
+        System.out.print("A nyerőszám: " + spinTheWheel() + " ");
+        checkAndPayBets(win);
 
     }
 
@@ -144,7 +144,9 @@ public class RouletteTable {
             Splitting playerBetPosition = actualPlayer.getPlayerBets().get(actualPlayer.getPlayerBets().size() - 1).getBetPosition();
             if (tableMap.get(lastWinnerPosition).contains(playerBetPosition)) {
                 win = true;
+                System.out.println("  Nyert: \n");
                 actualPlayer.addWin(calculatePrise(playerBetAmount, playerBetPosition));
+
             } else {
                 win = false;
                 actualPlayer.addLoose();

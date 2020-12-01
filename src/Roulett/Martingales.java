@@ -32,6 +32,7 @@ public class Martingales extends Player {
             System.out.println("Az egyenlege: " + getBudget() + " A tét: " + playerPot);
             if (win) {
                 System.out.println("Ön nyert! A nyeremény: " + playerPot * 2 + " egynlege: " + getBudget());
+                playerPot = getTableMinBet();
             } else if (!win) {
                 if (playerPot <= getTableMaxBet() / 2) {
                     playerPot *= 2;
@@ -43,5 +44,10 @@ public class Martingales extends Player {
         } else {
             System.out.println("Önnek üres a péztárzája");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Martingales{}";
     }
 }
