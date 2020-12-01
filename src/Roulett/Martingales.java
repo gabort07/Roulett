@@ -2,16 +2,16 @@ package Roulett;
 
 import java.util.ArrayList;
 
-public class Martingele extends Player {
+public class Martingales extends Player {
 
     private String color;
     private ArrayList<Bet> bets;
 
-    public Martingele(int minBet, int maxBet) {
+    public Martingales(int minBet, int maxBet) {
         super(minBet,maxBet);
     }
 
-    public Martingele(int budget, int minBet, int maxBet, String color) {
+    public Martingales(int budget, int minBet, int maxBet, String color) {
         super(budget,minBet,maxBet);
         this.color = color;
     }
